@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>insta485</title>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+<body>
+    <div class="header">
+        <div id="left"> 
+            <div id="icon">
+                <a href="/"><img src="/static/images/instagram.png" alt="Instagram Icon" width="40" height="40"></a>
+            </div>
+            <div id="insta485">
+                <a href="/"><h1 style="font-family: 'Courier'"><i style="font-family: cursive;">Insta</i>485</h1></a>
+            </div>
+        </div>
+        <div id="right">
+            <div id="explore">
+                <a href="/explore/"><h1>explore</h1></a>
+            </div>
+            <div id="username">
+                <a href="/users/{{logname}}/"><h1>{{logname}}</h1></a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="body">
+        <p id="awdeorios-username"><b>Following</b></p>
+        <br>
+        {% for user in following_we_follow %}
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-left">
+                        <div class="user_prof_pic">
+                            <a href="/users/{{user.username}}/"><img src="/uploads/{{user.filename}}" alt="Profile Pic Of {{user.username}}" width="30" height="30"></a>
+                        </div>
+                        <div>
+                            <a href="/users/{{user.username}}/"><p><b>{{user.username}}</b></p></a>
+                        </div>
+                    </div>
+                    <div class="post-right">
+                        {% if logname != user.username %}
+                            <p style="font-size: 15px; color: grey;">following</p>
+                            <form action="/following/?target=/users/{{curr_user}}/following/" method="post" enctype="multipart/form-data">
+                                <input type="submit" name="unfollow" value="unfollow"/>
+                                <input type="hidden" name="username" value="{{user.username}}"/>
+                                <input type="hidden" name="operation" value="unfollow"/>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        {% for user in following %}
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-left">
+                        <div class="user_prof_pic">
+                            <a href="/users/{{user.username}}/"><img src="/uploads/{{user.filename}}" alt="Profile Pic Of {{user.username}}" width="30" height="30"></a>
+                        </div>
+                        <div>
+                            <a href="/users/{{user.username}}/"><p><b>{{user.username}}</b></p></a>
+                        </div>
+                    </div>
+                    <div class="post-right">
+                        {% if logname != user.username %}
+                            <p style="font-size: 15px; color: grey;">not following</p>
+                            <form action="/following/?target=/users/{{curr_user}}/following/" method="post" enctype="multipart/form-data">
+                                <input type="submit" name="follow" value="follow"/>
+                                <input type="hidden" name="username" value="{{user.username}}"/>
+                                <input type="hidden" name="operation" value="follow"/>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+</body>
+</html>
