@@ -1,0 +1,118 @@
+<html>
+
+<title>Asteroids</title>
+
+<!-- JS -->
+<script src='scripts/jquery.min.js'></script>
+<script src='scripts/page.js'></script>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="style/index.css">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<!-- HTML -->
+<body>
+  <div class='outer-container'>
+      <div class='game-window'>
+        
+        <!-- Main Menu -->
+        <div id="landing_page">
+          <div id="landing-header">
+            <img src="./src/asteroid.png" >
+              Asteroids
+            <img src="./src/asteroid.png" >
+          </div>
+          <div id="play_game_button">
+            <button onclick="how_to_page()">Play Game!</button>
+          </div>
+          <div id="settings_button">
+            <button onclick="settings()">Settings</button>
+          </div>
+          <div id="game_over">
+            <div>GAME OVER!</div>
+            <div>YOU HAVE TO FIX YOUR SPACESHIP!</div>
+            <div id="display_score"></div>
+            <div id="start_over_button">
+              <button onclick="startOver()">Start Over</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div id="settings_page">
+          <div>
+            Settings
+          </div>
+          <div>
+            <div>
+              Volume: <span id="demo"></span>
+            </div>
+            <div id="slidecontainer">
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+          </div>
+          <div id="difficulty-container">
+            Difficulty
+            <div id="diff-buttons">
+              <button id="difficulty_easy">Easy</button>
+              <button id="difficulty_normal">Normal</button>
+              <button id="difficulty_hard">Hard</button>
+            </div>
+          </div>
+          <div id ="button-container">
+            <button onclick="close_settings()">Close</button>
+          </div>
+        </div>
+
+        <!-- Tutorial -->
+        <div id="tutorial">
+          <div id="tutorial_header">
+            <strong>How to Play</strong>
+          </div>
+          <div id="middle_text">
+            <p>
+              <strong>Avoid</strong>
+              <em>asteroids!</em>
+            </p>
+            <img src="./src/asteroid.png">
+            <p>
+              <strong>Collect</strong>
+              <em>shields!</em>
+              <strong>Travel</strong>
+              through
+              <em>portals</em>
+              to the next level!
+            </p>
+            <img src="./src/shield.gif">
+            <img src="./src/port.gif">
+            <p>
+              <strong>Gain</strong>
+              as many
+              <em>points</em>
+              as possible!
+            </p>
+          </div>
+          <button onclick="play_game()">Start</button>
+        </div>
+
+        <!-- Actual Game -->
+        <div id="actual_game">
+          <div class="asteroidSection"> 
+            <div class="curAstroid"> </div> 
+          </div>
+          <div id="game_right_section">
+              <div id="scoreword">
+                  SCORE
+                  <div id="score_num"></div>
+              </div>
+              <div id="danger">DANGER
+              <div id="danger_num"></div></div>
+              <div id="level">LEVEL
+              <div id="level_num"></div></div>
+          </div>
+        </div>    
+      </div> <!-- end game-window -->
+  </div> <!-- end outer-container -->
+</body>
+
+</html>
