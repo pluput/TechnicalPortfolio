@@ -290,6 +290,8 @@ img {
 
 .home-blob-img {
   width: 240px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .home-data {
