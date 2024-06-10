@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>insta485</title>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+<body>
+    <div class="header">
+        <div id="left"> 
+            <div id="icon">
+                <a href="/"><img src="/static/images/instagram.png" alt="Instagram Icon" width="40" height="40"></a>
+            </div>
+            <div id="insta485">
+                <a href="/"><h1 style="font-family: 'Courier'"><i style="font-family: cursive;">Insta</i>485</h1></a>
+            </div>
+        </div>
+        <div id="right">
+            <div id="explore">
+                <a href="/explore/"><h1>explore</h1></a>
+            </div>
+            <div id="username">
+                <a href="/users/{{logname}}/"><h1>{{logname}}</h1></a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="body">
+        <p id="awdeorios-username">{{curr_user}}</p>
+        {% if logname == curr_user %}
+            <a href='/accounts/edit/'><p><b>Edit profile</b></p></a>
+            <form action="/accounts/logout/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="logout" value="Logout"/>
+            </form>
+        {% elif is_following %}
+            <p>following</p>
+            <form action="/following/?target=/users/{{curr_user}}/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="unfollow" value="unfollow"/>
+                <input type="hidden" name="username" value="{{curr_user}}"/>
+                <input type="hidden" name="operation" value="unfollow"/>
+            </form>
+        {% else %}
+            <p>not following</p>
+            <form action="/following/?target=/users/{{curr_user}}/" method="post" enctype="multipart/form-data">
+                <input type="submit" name="follow" value="follow"/>
+                <input type="hidden" name="username" value="{{curr_user}}"/>
+                <input type="hidden" name="operation" value="follow"/>
+            </form>
+        {% endif %}]
+
+        {% if total_posts == 1 %}
+            <span>{{total_posts[0]['COUNT(*)']}} post </span>
+        {% else %}
+            <span>{{total_posts[0]['COUNT(*)']}} posts </span>
+        {% endif %}
+
+        {% if followers['COUNT(*)'] == 1 %}
+            <span><a href="/users/{{curr_user}}/followers/"><b>{{followers[0]['COUNT(*)']}} follower</b></a></span>
+        {% else %}
+            <span><a href="/users/{{curr_user}}/followers/"><b>{{followers[0]['COUNT(*)']}} followers</b></a></span>
+        {% endif %}
+
+        <span><a href="/users/{{curr_user}}/following/"><b>{{following[0]['COUNT(*)']}} following</b></a></span>
+
+        <p>{{fullname['fullname']}}</p>
+        <br>
+        {% if logname == curr_user %}
+            <form action="/posts/?target=/user/{{logname}}/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/*" required/>
+                <input type="submit" name="create_post" value="upload new post"/>
+                <input type="hidden" name="operation" value="create"/>
+            </form>
+        {% endif %}
+        <br>
+        {% for post in posts %}
+            <a href="/posts/{{post.postid}}/"><img class="awdeorios-img" src="/uploads/{{post.filename}}" alt="Adult Chickens on Plank At Chicken Coop"></a>
+        {% endfor %}
+    </div>
+</body>
+</html>

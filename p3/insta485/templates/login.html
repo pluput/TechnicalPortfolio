@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>insta485</title>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+<body>
+    <div class="header">
+        <div id="left"> 
+            <div id="icon">
+                <img src="/static/images/instagram.png" alt="Instagram Icon" width="40" height="40">
+            </div>
+            <div id="insta485">
+                <h1 style="font-family: 'Courier'"><i style="font-family: cursive;">Insta</i>485</h1>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <!-- pretty similar to comment section in '/' except with username and password -->
+    <div id="login-page">
+        <!-- DO NOT CHANGE THIS (aside from styling) -->
+        <form action="/accounts/?target=/" method="post" enctype="multipart/form-data">
+            <input type="text" name="username" required/>
+            <input type="password" name="password" required/>
+            <input type="submit" value="login"/>
+            <input type="hidden" name="operation" value="login"/>
+        </form>
+    </div>
+
+    <div>
+        <p>Don't have an account?<a href="/accounts/create/"> <b>Sign up</b> </a></p>
+    </div>
+
+</body>
+</html>
