@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>insta485</title>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+<body>
+    <div class="header">
+        <div id="left"> 
+            <div id="icon">
+                <a href="/"><img src="/images/instagram.png" alt="Instagram Icon" width="40" height="40"></a>
+            </div>
+            <div id="insta485">
+                <a href="/"><h1 style="font-family: 'Courier'"><i style="font-family: cursive;">Insta</i>485</h1></a>
+            </div>
+        </div>
+        <div id="right">
+            <div id="explore">
+                <a href="/explore/"><h1>explore</h1></a>
+            </div>
+            <div id="username">
+                <a href="/users/{{logname}}/"><h1>{{logname}}</h1></a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="body">
+        <p id="awdeorios-username">{{username}}</p>
+        {% if logname != username %}
+            {% if logname_follows_username %}
+                <p>following</p>
+            {% else %}
+                <p>not following</p>
+            {% endif %}
+        {% endif %}
+
+        {% if total_posts == 1 %}
+            <span>{{total_posts}} post </span>
+        {% else %}
+            <span>{{total_posts}} posts </span>
+        {% endif %}
+
+        {% if followers == 1 %}
+            <span><a href="/users/{{username}}/followers/"><b>{{followers}} follower</b></a></span>
+        {% else %}
+            <span><a href="/users/{{username}}/followers/"><b>{{followers}} followers</b></a></span>
+        {% endif %}
+
+        <span><a href="/users/{{username}}/following/"><b>{{following}} following</b></a></span>
+
+        <p>{{fullname}}</p>
+        <br>
+        {% for post in posts %}
+        <a href="/posts/{{post.postid}}/"><img class="awdeorios-img" src="{{post.img_url}}" alt="Adult Chickens on Plank At Chicken Coop"></a>
+        {% endfor %}
+    </div>
+</body>
+</html>
