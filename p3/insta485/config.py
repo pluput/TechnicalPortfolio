@@ -3,7 +3,7 @@
 import pathlib
 
 # Root of this application, useful if it doesn't occupy an entire domain
-APPLICATION_ROOT = '/'
+APPLICATION_ROOT = '/p3'
 
 # Secret key for encrypting cookies
 SECRET_KEY = (b'\xaf\xcdA\xee\xaa\xe6N\xbf\x00' +
