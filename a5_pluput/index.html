@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+   <title> 493 Artist Search</title>
+   <!--Bootstrap-->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+   <!--Custom Style-->
+   <link rel="stylesheet" type="text/css" href="index.css">
+   <!--Vue-->
+   <script src="https://unpkg.com/vue@3"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+</head>
+
+<body>
+   <div id='app'>
+      <nav class="navbar navbar-default">
+         <div class="container">
+            <div class="navbar-header">
+               <h3>493 Artist Search</h3>
+            </div>
+         </div>
+      </nav>
+      <div class="container">
+         <div class="row searchbar">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+               <h4>Enter the name of the artist and press enter: </h4>
+               <input type="text" v-model="enteredSearch" v-on:keyup.enter="enterPressed">
+            </div>
+         </div>
+
+         <div class="col-lg-12 col-md-12 col-sm-12">
+            <h4>Search Result (Total {{resultCount}} Found.)</h4>
+         </div>
+
+         <div class="col-lg-12 col-md-12 col-sm-12">
+            <div id="buttons" v-if=categoriesGiven[0]>
+               <button :class="[allActive ? 'btn btn-success' : '', ]" @click="allActiveClick">ALL</button>
+               <template v-for="category in categoriesGiven">
+                  <button :class="[categoriesChosen.includes(category) ? 'btn btn-primary' : '', ]" @click="categoryActiveClick(category)">{{category}}</button>
+               </template>
+            </div>
+            <h4>
+               List of results
+            </h4>
+            <div class="dropdown">
+               <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                 Sort list of results by
+                 <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                 <li><a href="#" :class="[resetToOriginalActive ? 'bg-primary' : '', ]" @click="resetToOriginal">Reset to original</a></li>
+                 <li><a href="#" :class="[collectionNameActive ? 'bg-primary' : '', ]" @click="collectionName">Collection Name</a></li>
+                 <li><a href="#" :class="[priceActive ? 'bg-primary' : '', ]" @click="price">Price</a></li>
+               </ul>
+             </div>
+
+             <div>
+                <button @click="sortListPopUp">Get Sorted List</button>
+             </div>
+         </div>
+
+         <div v-for="result in resultsToShow">
+            <div class='col-lg-6 col-md-6 col-sm-6 artist'>
+               <div class='artist-albumcover col-sm-4'>
+                  <img :src=result.artworkUrl100>
+               </div>
+
+               <div class='artist-info col-sm-6'>
+                  <ul class="nav nav-tabs">
+                     <li class="active"><a data-toggle="tab" :href="'#description-' + result.trackId">Description</a></li>
+                     <li><a data-toggle="tab" :href="'#track-info-' + result.trackId">Track Info</a></li>
+                  </ul>
+                  <div class="tab-content">
+                     <div class="tab-pane fade in active" :id="'description-' + result.trackId">
+                        <p v-if=result.artistName><b>Artist Name:</b> {{result.artistName}}</p>
+                        <p v-else><b>Artist Name:</b> No information provided</p>
+                        <p v-if=result.collectionName><b>Collection Name:</b> {{result.collectionName}}</p>
+                        <p v-else><b>Collection Name:</b> No information provided</p>
+                        <p v-if=result.collectionPrice><b>Price:</b> {{result.collectionPrice}}</p>
+                        <p v-else><b>Price:</b> 0</p>
+                        <p v-if=result.kind><b>Kind:</b> {{result.kind}}</p>
+                        <p v-else><b>Kind:</b> No information provided</p>
+                        <p v-if=result.previewUrl><b>Preview:</b> <a :href=result.previewUrl>Link</a></p>
+                        <p v-else><b>Preview:</b> No information provided</p>
+                        <button id=result.trackId @click="playButton(result)">{{play.get(result.trackId)}}</button>
+                     </div>
+                     <div class="tab-pane fade" :id="'track-info-' + result.trackId">
+                        <p><b>Track ID:</b> {{result.trackId}}</p>
+                        <p><b>Country:</b> {{result.country}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>   
+
+      </div>
+   </div>
+   <script src="script.js"></script>
+</body>
+</html>
