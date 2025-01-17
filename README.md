@@ -4,10 +4,8 @@ Welcome to Paula's Portfolio!
 
 
 ## Features
-
 - Super Fast and Optimized for SEO
 - Dark/Light Toggle Modes
-
 
 
 
